@@ -177,9 +177,9 @@ async def chat_endpoint(request: dict):
 # --- Mount Static Files (Catch-all for frontend) ---
 api.mount("/", StaticFiles(directory="static", html=True), name="static")
 
+app = api
+
 if __name__ == "__main__":
     import uvicorn
-    port = int(os.environ.get("PORT", 8000))
-    logger.info(f"Starting MediGrid AI on port {port}")
-    uvicorn.run("fast_api_file:api", host="0.0.0.0", port=port)
+    uvicorn.run("fast_api_file:app", host="0.0.0.0", port=8000)
 
