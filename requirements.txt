@@ -1,0 +1,10 @@
+google-generativeai
+python-dotenv
+pdfplumber
+Pillow
+fastapi
+fastapi[standard]
+uvicorn
+pydantic
+pandas
+pyttsx3
