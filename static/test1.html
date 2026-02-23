@@ -1557,8 +1557,8 @@
                     return; // Stop processing if too blurry
                 }
 
-                // STEP 2: Edge Detection & Auto Crop & Contrast
-                document.getElementById('analyzingText').textContent = "Enhancing Contrast...";
+                // STEP 2: Edge Detection & Auto Crop
+                document.getElementById('analyzingText').textContent = "Auto Cropping...";
 
                 setTimeout(() => {
                     enhanceAndCropDocument(imgElement, fileType);
@@ -1716,7 +1716,7 @@
                 const finalW = useCrop ? cropW : width;
                 const finalH = useCrop ? cropH : height;
 
-                // 2. Crop & Enhance Contrast
+                // 2. Crop
                 const croppedCanvas = document.createElement('canvas');
                 croppedCanvas.width = finalW;
                 croppedCanvas.height = finalH;
@@ -1724,20 +1724,7 @@
 
                 croppedCtx.drawImage(canvas, finalX, finalY, finalW, finalH, 0, 0, finalW, finalH);
 
-                // Apply contrast enhancement
-                const croppedData = croppedCtx.getImageData(0, 0, finalW, finalH);
-                const d = croppedData.data;
-                const contrast = 1.2; // Increase contrast by 20%
-                const intercept = 128 * (1 - contrast);
-
-                for (let i = 0; i < d.length; i += 4) {
-                    d[i] = d[i] * contrast + intercept; // R
-                    d[i + 1] = d[i + 1] * contrast + intercept; // G
-                    d[i + 2] = d[i + 2] * contrast + intercept; // B
-                    // A remains unchanged
-                }
-
-                croppedCtx.putImageData(croppedData, 0, 0);
+                // Auto correction (contrast) has been removed from preview as requested
 
                 // Save processed image
                 const mimeType = fileType || 'image/jpeg';
